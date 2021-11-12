@@ -1,0 +1,8 @@
+{
+    "id": "at.fipsi.jarvis.audio",
+    "name": "Audio",
+    "version": "0.0.1",
+    "entry-point": "audio.py",
+    "enabled": true,
+    "port": 6666
+}
