@@ -17,13 +17,14 @@ import endpoints
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 CURRENT_WORKING_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 FILE_BASE_NAME = os.path.basename(__file__).split('.')[0]
-CONFIG = json.load(f"{CURRENT_WORKING_DIRECTORY}/plugin.json")
+CONFIG = json.load(open(f"{CURRENT_WORKING_DIRECTORY}/plugin.json", "r"))
 PORT = CONFIG.get("port", 6001)
+ID = CONFIG.get("id")
 
 logger = Logger(f"{CURRENT_WORKING_DIRECTORY}/{FILE_BASE_NAME}.log")
 server = PluginServer(PORT, logger.info)
 
-logger.info(f"Started {FILE_BASE_NAME} plugin on port {PORT}")
+logger.info(f"Started plugin server", id=ID, port=PORT)
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 # Perform any actions before script start here
@@ -34,4 +35,4 @@ except KeyboardInterrupt: pass
 
 # Place actions you want to perform before exit here
 
-logger.info("Stopping plugin")
+logger.info("Stopping plugin", id=ID)
